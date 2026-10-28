@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Kaze Bug WA</string>
+    <string name="accessibility_desc">Aksesibilitas dibutuhkan untuk mengotomatisasi pengiriman pesan WA.</string>
+</resources>

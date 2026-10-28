@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="20dp" android:background="#050505">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="KAZE BUG WA APK" android:textColor="#00FF00" android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="20dp"/>
+
+    <EditText android:id="@+id/targetNum" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:hint="Nomor Target (contoh: 628...)" android:textColorHint="#888" android:textColor="#FFF" android:inputType="phone" android:layout_marginBottom="15dp"/>
+
+    <EditText android:id="@+id/msgCount" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:hint="Jumlah Spam" android:text="999" android:textColorHint="#888" android:textColor="#FFF" android:inputType="number" android:layout_marginBottom="20dp"/>
+
+    <Button android:id="@+id/btnStart" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="MULAI BUG" android:backgroundTint="#00FF00" android:textColor="#000" android:layout_marginBottom="10dp"/>
+
+    <Button android:id="@+id/btnStop" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="STOP" android:backgroundTint="#FF0000" android:textColor="#FFF" android:layout_marginBottom="20dp"/>
+
+    <TextView android:id="@+id/status" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Status: Siap" android:textColor="#FFF" android:textSize="16sp"/>
+
+</LinearLayout>
