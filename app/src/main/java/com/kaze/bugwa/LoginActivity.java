@@ -58,7 +58,7 @@ public class LoginActivity extends Activity {
                     String tier = json.optString("tier");
 
                     runOnUiThread(() -> {
-                        if (success && tier.equals("VVIP")) {
+                        if (success && (tier.equals("VVIP") || tier.equals("DEVELOPER"))) {
                             Toast.makeText(LoginActivity.this, "AKSES DITERIMA!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
