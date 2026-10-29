@@ -36,7 +36,7 @@ public class LoginActivity extends Activity {
 
             new Thread(() -> {
                 try {
-                    URL url = new URL("https://1cd5b92cdb8a53.lhr.life/api/login"); 
+                    URL url = new URL("https://a290b8ec5600ce.lhr.life/api/login"); 
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json");
