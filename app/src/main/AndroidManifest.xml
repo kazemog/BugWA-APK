@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.kaze.bugwa">
-    <application android:allowBackup="true" android:label="Kaze Bug WA" android:theme="@android:style/Theme.DeviceDefault.Dark">
-        <activity android:name=".MainActivity" android:exported="true">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application android:allowBackup="true" android:label="KAZE MORALES" android:icon="@drawable/ic_kaze" android:theme="@android:style/Theme.Black.NoTitleBar">
+        <activity android:name=".LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" android:exported="false" />
         <service android:name=".SpamService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" android:exported="true">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />

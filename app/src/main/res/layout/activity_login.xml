@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#050000" android:gravity="center" android:padding="24dp" android:orientation="vertical">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚡ KAZE MORALES" android:textColor="#FF0000" android:textSize="28sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SECURE LOGIN ACCESS" android:textColor="#888" android:textSize="12sp" android:layout_marginBottom="32dp"/>
+    <EditText android:id="@+id/loginUser" android:layout_width="match_parent" android:layout_height="50dp" android:hint="Username" android:textColorHint="#555" android:textColor="#FFF" android:background="#110000" android:padding="12dp" android:layout_marginBottom="16dp"/>
+    <EditText android:id="@+id/loginPass" android:layout_width="match_parent" android:layout_height="50dp" android:hint="Password" android:inputType="textPassword" android:textColorHint="#555" android:textColor="#FFF" android:background="#110000" android:padding="12dp" android:layout_marginBottom="24dp"/>
+    <Button android:id="@+id/btnLogin" android:layout_width="match_parent" android:layout_height="55dp" android:text="MASUK" android:textStyle="bold" android:textColor="#FFF" android:backgroundTint="#CC0000"/>
+</LinearLayout>
