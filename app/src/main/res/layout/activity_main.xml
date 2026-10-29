@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:padding="20dp" android:background="#050505">
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="KAZE BUG WA APK" android:textColor="#00FF00" android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="20dp"/>
-
-    <EditText android:id="@+id/targetNum" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:hint="Nomor Target (contoh: 628...)" android:textColorHint="#888" android:textColor="#FFF" android:inputType="phone" android:layout_marginBottom="15dp"/>
-
-    <EditText android:id="@+id/msgCount" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:hint="Jumlah Spam" android:text="999" android:textColorHint="#888" android:textColor="#FFF" android:inputType="number" android:layout_marginBottom="20dp"/>
-
-    <Button android:id="@+id/btnStart" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="MULAI BUG" android:backgroundTint="#00FF00" android:textColor="#000" android:layout_marginBottom="10dp"/>
-
-    <Button android:id="@+id/btnStop" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="STOP" android:backgroundTint="#FF0000" android:textColor="#FFF" android:layout_marginBottom="20dp"/>
-
-    <TextView android:id="@+id/status" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="Status: Siap" android:textColor="#FFF" android:textSize="16sp"/>
-
-</LinearLayout>
+    android:background="#050000" android:padding="16dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+        <VideoView android:id="@+id/bannerVideo" android:layout_width="match_parent" android:layout_height="200dp" android:layout_marginBottom="16dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🎯 TARGET WHATSAPP" android:textColor="#FF3333" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+        <EditText android:id="@+id/targetNum" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Contoh: 628123456789" android:textColorHint="#555" android:textColor="#FFF" android:inputType="phone" android:layout_marginBottom="16dp" android:backgroundTint="#550000"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PILIH PAYLOAD BUG" android:textColor="#FF3333" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="8dp">
+            <LinearLayout android:id="@+id/btnBugCrash" android:layout_width="0dp" android:layout_weight="1" android:layout_height="80dp" android:orientation="vertical" android:gravity="center" android:background="#330000" android:layout_marginRight="8dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💥" android:textSize="20sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Detective Crash" android:textColor="#FFF" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/btnBugDelay" android:layout_width="0dp" android:layout_weight="1" android:layout_height="80dp" android:orientation="vertical" android:gravity="center" android:background="#110000" android:layout_marginLeft="8dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⏳" android:textSize="20sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Invisible Delay" android:textColor="#888" android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="16dp">
+            <LinearLayout android:id="@+id/btnBugFreeze" android:layout_width="0dp" android:layout_weight="1" android:layout_height="80dp" android:orientation="vertical" android:gravity="center" android:background="#110000" android:layout_marginRight="8dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="❄️" android:textSize="20sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Freeze Chat" android:textColor="#888" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/btnBugQuota" android:layout_width="0dp" android:layout_weight="1" android:layout_height="80dp" android:orientation="vertical" android:gravity="center" android:background="#110000" android:layout_marginLeft="8dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📁" android:textSize="20sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Quota Limiter" android:textColor="#888" android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <Button android:id="@+id/btnStart" android:layout_width="match_parent" android:layout_height="60dp" android:text="SEND BUG" android:textSize="18sp" android:textStyle="bold" android:textColor="#FFF" android:backgroundTint="#CC0000" android:layout_marginBottom="16dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TERMINAL LOG" android:textColor="#FF3333" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+        <ScrollView android:layout_width="match_parent" android:layout_height="150dp" android:background="#000000" android:padding="8dp">
+            <TextView android:id="@+id/terminalLog" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="[SYSTEM] Ready...\n[SYSTEM] Waiting for target..." android:textColor="#00FF00" android:fontFamily="monospace" android:textSize="12sp"/>
+        </ScrollView>
+    </LinearLayout>
+</ScrollView>
