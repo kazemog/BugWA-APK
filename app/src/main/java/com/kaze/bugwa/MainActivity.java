@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         bannerVideo = findViewById(R.id.bannerVideo);
-        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.bannerbug);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.bannerapk);
         bannerVideo.setVideoURI(videoUri);
         bannerVideo.setOnPreparedListener(mp -> {
             mp.setLooping(true);
