@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:background="@drawable/bg_glow_border" android:padding="24dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="CARA PAKAI" android:textSize="20sp" android:textStyle="bold" android:textColor="#00FF41" android:fontFamily="sans-serif-black" android:layout_marginBottom="16dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="1. Aktifkan Aksesibilitas di HP.\n2. Masukkan nomor target.\n3. Pilih metode bug.\n4. Klik SEND BUG." android:textColor="#FFF" android:textSize="14sp" android:lineSpacingExtra="4dp" android:layout_marginBottom="20dp"/>
+    <Button android:id="@+id/btnTutupTutorial" android:layout_width="match_parent" android:layout_height="50dp" android:text="MENGERTI" android:textStyle="bold" android:textColor="#000" android:backgroundTint="#00FF41"/>
+</LinearLayout>

