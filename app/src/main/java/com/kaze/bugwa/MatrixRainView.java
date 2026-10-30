@@ -23,7 +23,6 @@ public class MatrixRainView extends View {
         paint.setColor(Color.parseColor("#00FF41"));
         paint.setTextSize(fontSize);
         paint.setAntiAlias(true);
-        paint.setShadowLayer(4, 0, 0, Color.parseColor("#00FF41"));
     }
 
     @Override
@@ -41,22 +40,20 @@ public class MatrixRainView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.parseColor("#050505"));
+        // Efek fade hitam biar ada jejak
+        canvas.drawColor(Color.argb(50, 0, 0, 0));
         if (drops == null || drops.length == 0) return;
 
         for (int i = 0; i < drops.length; i++) {
             int charIndex = random.nextInt(chars.length());
             String text = String.valueOf(chars.charAt(charIndex));
-            paint.setColor(Color.WHITE);
             canvas.drawText(text, i * fontSize, drops[i] * fontSize, paint);
-            paint.setColor(Color.parseColor("#00FF41"));
-            canvas.drawText(text, i * fontSize, (drops[i] - 1) * fontSize, paint);
 
             if (drops[i] * fontSize > getHeight() && random.nextFloat() > 0.95) {
                 drops[i] = 0;
             }
             drops[i]++;
         }
-        invalidate();
+        invalidate(); // Loop terus menerus
     }
 }

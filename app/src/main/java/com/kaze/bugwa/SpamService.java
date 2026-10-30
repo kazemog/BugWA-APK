@@ -14,6 +14,7 @@ public class SpamService extends AccessibilityService {
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
+        // Cek isRunning, kalau user pencet STOP, ini langsung berhenti
         if (!MainActivity.isRunning || count >= 500 || isSending) return;
 
         AccessibilityNodeInfo root = getRootInActiveWindow();
@@ -31,8 +32,6 @@ public class SpamService extends AccessibilityService {
                     case "delay": for (int i = 0; i < 5000; i++) sb.append("\u200B"); break;
                     case "freeze": sb.append("FREEZE: "); for (int i = 0; i < 300; i++) sb.append("🔥"); break;
                     case "quota": sb.append("QUOTA: "); for (int i = 0; i < 1000; i++) sb.append("█"); break;
-                    case "virus": sb.append("VIRUS: "); for (int i = 0; i < 1000; i++) sb.append("☣️"); break;
-                    case "call": sb.append("CALLING..."); break;
                 }
 
                 inputBox.performAction(AccessibilityNodeInfo.ACTION_FOCUS);
