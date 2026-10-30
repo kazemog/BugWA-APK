@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
     public static String targetNum = "";
     public static String senderNum = "";
     public static String bugType = "crash";
-    public static String senderType = "private"; // Default private
+    public static String senderType = "private";
 
     private LinearLayout currentBugBtn;
     private Button btnPublic, btnPrivate;
@@ -30,30 +30,33 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Load Banner (Anti Crash)
-        ImageView banner = findViewById(R.id.bannerImage);
-        int bannerResId = getResources().getIdentifier("bannerbug", "drawable", getPackageName());
-        if (bannerResId != 0) banner.setImageResource(bannerResId);
+        try {
+            ImageView banner = findViewById(R.id.bannerImage);
+            int bannerResId = getResources().getIdentifier("bannerbug", "drawable", getPackageName());
+            if (bannerResId != 0) banner.setImageResource(bannerResId);
+        } catch (Exception e) {}
 
         final EditText etTarget = findViewById(R.id.targetNum);
         Button btnStart = findViewById(R.id.btnStart);
         
-        // Setup Bug Gradient Selection
         LinearLayout bugCrash = findViewById(R.id.bugCrash);
         LinearLayout bugDelay = findViewById(R.id.bugDelay);
         LinearLayout bugFreeze = findViewById(R.id.bugFreeze);
         LinearLayout bugQuota = findViewById(R.id.bugQuota);
-        currentBugBtn = bugCrash; // Default
+        currentBugBtn = bugCrash;
 
         bugCrash.setOnClickListener(v -> selectBug("crash", bugCrash));
         bugDelay.setOnClickListener(v -> selectBug("delay", bugDelay));
         bugFreeze.setOnClickListener(v -> selectBug("freeze", bugFreeze));
         bugQuota.setOnClickListener(v -> selectBug("quota", bugQuota));
 
-        // Setup Sender Gradient Selection
         btnPublic = findViewById(R.id.btnPublic);
         btnPrivate = findViewById(R.id.btnPrivate);
         
+        // Set default private biar aman
+        btnPrivate.setBackgroundResource(R.drawable.bg_bug_active);
+        btnPublic.setBackgroundResource(R.drawable.bg_bug_inactive);
+
         btnPublic.setOnClickListener(v -> selectSender("public", btnPublic, btnPrivate));
         btnPrivate.setOnClickListener(v -> selectSender("private", btnPrivate, btnPublic));
 
@@ -70,7 +73,6 @@ public class MainActivity extends Activity {
             SharedPreferences prefs = getSharedPreferences("kaze", MODE_PRIVATE);
             senderNum = prefs.getString("sender", "");
 
-            // Validasi Sender
             if (senderType.equals("private") && senderNum.isEmpty()) {
                 Toast.makeText(this, "Private Sender kosong! Silakan Manage Sender dulu.", Toast.LENGTH_LONG).show();
                 showSenderDialog();
@@ -88,10 +90,8 @@ public class MainActivity extends Activity {
 
     private void selectBug(String type, LinearLayout btn) {
         bugType = type;
-        // Reset semua ke inactive
         LinearLayout[] btns = {findViewById(R.id.bugCrash), findViewById(R.id.bugDelay), findViewById(R.id.bugFreeze), findViewById(R.id.bugQuota)};
         for(LinearLayout b : btns) b.setBackgroundResource(R.drawable.bg_bug_inactive);
-        // Set yang dipilih ke active (gradient emas)
         btn.setBackgroundResource(R.drawable.bg_bug_active);
         currentBugBtn = btn;
     }
@@ -109,12 +109,13 @@ public class MainActivity extends Activity {
         builder.setView(dialogView);
 
         final AlertDialog dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        if(dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
         
         final EditText etSender = dialogView.findViewById(R.id.etSenderNumber);
         Button btnSave = dialogView.findViewById(R.id.btnSaveSender);
 
-        // Load nomor yang udah disimpen
         SharedPreferences prefs = getSharedPreferences("kaze", MODE_PRIVATE);
         String savedNum = prefs.getString("sender", "");
         if (!savedNum.isEmpty()) etSender.setText(savedNum);

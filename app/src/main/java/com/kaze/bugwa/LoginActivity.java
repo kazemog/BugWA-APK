@@ -14,10 +14,11 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Load Logo
-        ImageView logo = findViewById(R.id.loginLogo);
-        int logoResId = getResources().getIdentifier("logo", "drawable", getPackageName());
-        if (logoResId != 0) logo.setImageResource(logoResId);
+        try {
+            ImageView logo = findViewById(R.id.loginLogo);
+            int logoResId = getResources().getIdentifier("logo", "drawable", getPackageName());
+            if (logoResId != 0) logo.setImageResource(logoResId);
+        } catch (Exception e) {}
 
         final EditText etUser = findViewById(R.id.loginUser);
         final EditText etPass = findViewById(R.id.loginPass);
