@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -19,44 +18,40 @@ public class MainActivity extends Activity {
     public static String targetNum = "";
     public static String senderNum = "";
     public static String bugType = "crash";
-    private LinearLayout currentBugBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Load Banner Image & Logo
+        // Load Banner Image Secara Paksa
         ImageView banner = findViewById(R.id.bannerImage);
         int bannerResId = getResources().getIdentifier("bannerbug", "drawable", getPackageName());
-        if (bannerResId != 0) banner.setImageResource(bannerResId);
-
-        ImageView logo = findViewById(R.id.logoImage);
-        int logoResId = getResources().getIdentifier("logo", "drawable", getPackageName());
-        if (logoResId != 0) logo.setImageResource(logoResId);
+        if (bannerResId != 0) {
+            banner.setImageResource(bannerResId);
+        } else {
+            banner.setBackgroundColor(0xFF333333); // Fallback abu-abu jika gambar gagal
+        }
 
         final EditText etTarget = findViewById(R.id.targetNum);
         Button btnStart = findViewById(R.id.btnStart);
         
-        // Setup Bug Selection
         LinearLayout bugCrash = findViewById(R.id.bugCrash);
         LinearLayout bugDelay = findViewById(R.id.bugDelay);
         LinearLayout bugFreeze = findViewById(R.id.bugFreeze);
         LinearLayout bugQuota = findViewById(R.id.bugQuota);
         LinearLayout bugVirus = findViewById(R.id.bugVirus);
+        LinearLayout bugCall = findViewById(R.id.bugCall);
 
-        currentBugBtn = bugCrash; // Default
+        bugCrash.setOnClickListener(v -> bugType = "crash");
+        bugDelay.setOnClickListener(v -> bugType = "delay");
+        bugFreeze.setOnClickListener(v -> bugType = "freeze");
+        bugQuota.setOnClickListener(v -> bugType = "quota");
+        bugVirus.setOnClickListener(v -> bugType = "virus");
+        bugCall.setOnClickListener(v -> bugType = "call");
 
-        bugCrash.setOnClickListener(v -> selectBug("crash", bugCrash));
-        bugDelay.setOnClickListener(v -> selectBug("delay", bugDelay));
-        bugFreeze.setOnClickListener(v -> selectBug("freeze", bugFreeze));
-        bugQuota.setOnClickListener(v -> selectBug("quota", bugQuota));
-        bugVirus.setOnClickListener(v -> selectBug("virus", bugVirus));
-
-        // Tombol Manage Sender
         findViewById(R.id.btnManageSender).setOnClickListener(v -> showAddSenderDialog());
 
-        // Tombol Start
         btnStart.setOnClickListener(v -> {
             targetNum = etTarget.getText().toString().trim();
             if(targetNum.startsWith("0")) targetNum = "62" + targetNum.substring(1);
@@ -80,21 +75,10 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void selectBug(String type, LinearLayout btn) {
-        bugType = type;
-        // Reset semua ke default (border biasa)
-        LinearLayout[] btns = {findViewById(R.id.bugCrash), findViewById(R.id.bugDelay), findViewById(R.id.bugFreeze), findViewById(R.id.bugQuota), findViewById(R.id.bugVirus)};
-        for(LinearLayout b : btns) b.setBackgroundResource(R.drawable.bg_glow_border);
-        
-        // Set yang aktif ke border glow nyala (bisa diganti drawable lain kalau mau)
-        btn.setBackgroundResource(R.drawable.bg_glow_button);
-        currentBugBtn = btn;
-    }
-
     private void showAddSenderDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("MANAGE SENDER");
-        builder.setMessage("Masukkan nomor WhatsApp Anda. Nomor akan didaftarkan secara lokal.");
+        builder.setMessage("Masukkan nomor WhatsApp Anda (Tanpa 0/+):");
         final EditText input = new EditText(this);
         input.setHint("Contoh: 628987654321");
         input.setInputType(android.text.InputType.TYPE_CLASS_PHONE);

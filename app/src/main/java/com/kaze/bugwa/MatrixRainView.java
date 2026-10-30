@@ -12,24 +12,18 @@ public class MatrixRainView extends View {
     private Paint paint = new Paint();
     private Random random = new Random();
     private int[] drops;
-    private String[] chars = {"0","1","ア","イ","ウ","エ","オ","カ","キ","ク","ケ","コ"};
-    private int fontSize = 30;
+    private String chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*";
+    private int fontSize = 24;
     private int columns;
 
-    public MatrixRainView(Context context) {
-        super(context);
-        init();
-    }
-
-    public MatrixRainView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
+    public MatrixRainView(Context context) { super(context); init(); }
+    public MatrixRainView(Context context, AttributeSet attrs) { super(context, attrs); init(); }
 
     private void init() {
-        paint.setColor(Color.parseColor("#00FF41")); // Hijau Matrix
+        paint.setColor(Color.parseColor("#00FF41"));
         paint.setTextSize(fontSize);
         paint.setAntiAlias(true);
+        paint.setShadowLayer(5, 0, 0, Color.parseColor("#00FF41"));
     }
 
     @Override
@@ -45,14 +39,22 @@ public class MatrixRainView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.parseColor("#050505")); // Background hitam
-
+        canvas.drawColor(Color.parseColor("#050505"));
         if (drops == null) return;
 
         for (int i = 0; i < drops.length; i++) {
-            String text = chars[random.nextInt(chars.length)];
+            int charIndex = random.nextInt(chars.length());
+            String text = String.valueOf(chars.charAt(charIndex));
+            
+            // Teks paling depan lebih terang
+            paint.setColor(Color.WHITE); 
             canvas.drawText(text, i * fontSize, drops[i] * fontSize, paint);
-            if (drops[i] * fontSize > getHeight() && random.nextFloat() > 0.975) {
+            
+            // Jejak di belakangnya hijau
+            paint.setColor(Color.parseColor("#00FF41"));
+            canvas.drawText(text, i * fontSize, (drops[i] - 1) * fontSize, paint);
+
+            if (drops[i] * fontSize > getHeight() && random.nextFloat() > 0.95) {
                 drops[i] = 0;
             }
             drops[i]++;
