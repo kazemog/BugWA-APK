@@ -26,18 +26,19 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Load Banner Image (bannerbug.jpg)
+        // Load Banner Image & Logo
         ImageView banner = findViewById(R.id.bannerImage);
-        banner.setImageResource(getResources().getIdentifier("bannerbug", "drawable", getPackageName()));
+        int bannerResId = getResources().getIdentifier("bannerbug", "drawable", getPackageName());
+        if (bannerResId != 0) banner.setImageResource(bannerResId);
 
-        // Load Logo Image (logo.jpg)
         ImageView logo = findViewById(R.id.logoImage);
-        logo.setImageResource(getResources().getIdentifier("logo", "drawable", getPackageName()));
+        int logoResId = getResources().getIdentifier("logo", "drawable", getPackageName());
+        if (logoResId != 0) logo.setImageResource(logoResId);
 
         final EditText etTarget = findViewById(R.id.targetNum);
         Button btnStart = findViewById(R.id.btnStart);
         
-        // Setup Bug Selection dengan Gradient Border
+        // Setup Bug Selection
         LinearLayout bugCrash = findViewById(R.id.bugCrash);
         LinearLayout bugDelay = findViewById(R.id.bugDelay);
         LinearLayout bugFreeze = findViewById(R.id.bugFreeze);
@@ -81,10 +82,12 @@ public class MainActivity extends Activity {
 
     private void selectBug(String type, LinearLayout btn) {
         bugType = type;
-        // Reset background yang lama ke inactive
-        currentBugBtn.setBackgroundResource(R.drawable.bg_bug_inactive);
-        // Set yang baru ke active
-        btn.setBackgroundResource(R.drawable.bg_bug_active);
+        // Reset semua ke default (border biasa)
+        LinearLayout[] btns = {findViewById(R.id.bugCrash), findViewById(R.id.bugDelay), findViewById(R.id.bugFreeze), findViewById(R.id.bugQuota), findViewById(R.id.bugVirus)};
+        for(LinearLayout b : btns) b.setBackgroundResource(R.drawable.bg_glow_border);
+        
+        // Set yang aktif ke border glow nyala (bisa diganti drawable lain kalau mau)
+        btn.setBackgroundResource(R.drawable.bg_glow_button);
         currentBugBtn = btn;
     }
 
