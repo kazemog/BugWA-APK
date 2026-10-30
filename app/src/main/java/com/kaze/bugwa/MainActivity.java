@@ -10,10 +10,10 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 public class MainActivity extends Activity {
     public static boolean isRunning = false;
@@ -31,15 +31,16 @@ public class MainActivity extends Activity {
 
         terminalLog = findViewById(R.id.terminalLog);
 
-        // LOAD BANNER
-        ImageView banner = findViewById(R.id.bannerImage);
-        int bannerResId = getResources().getIdentifier("bannerbug", "drawable", getPackageName());
-        if (bannerResId != 0) {
-            banner.setImageResource(bannerResId);
-            log("Banner loaded.");
-        } else {
-            log("ERROR: File bannerbug.jpg gak ketemu!");
-        }
+        // LOAD VIDEO BANNER
+        VideoView banner = findViewById(R.id.bannerVideo);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.bannerbug);
+        banner.setVideoURI(videoUri);
+        banner.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            mp.setVolume(0, 0); // Mute
+            banner.start();
+            log("Banner video loaded.");
+        });
 
         final EditText etTarget = findViewById(R.id.targetNum);
         Button btnStart = findViewById(R.id.btnStart);
@@ -74,14 +75,12 @@ public class MainActivity extends Activity {
         findViewById(R.id.btnManageSender).setOnClickListener(v -> showSenderDialog());
         findViewById(R.id.btnBaca).setOnClickListener(v -> showTutorial());
 
-        // STOP LOGIC
         btnStop.setOnClickListener(v -> {
             isRunning = false;
             Toast.makeText(this, "STOPPED!", Toast.LENGTH_SHORT).show();
             log("Bug dihentikan paksa oleh user.");
         });
 
-        // START LOGIC
         btnStart.setOnClickListener(v -> {
             targetNum = etTarget.getText().toString().trim();
             if(targetNum.startsWith("0")) targetNum = "62" + targetNum.substring(1);
