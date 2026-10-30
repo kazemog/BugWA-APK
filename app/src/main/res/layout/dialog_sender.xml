@@ -14,17 +14,7 @@
         android:textStyle="bold"
         android:textColor="#FFF"
         android:fontFamily="sans-serif-black"
-        android:shadowColor="#8B4513"
-        android:shadowRadius="10"
         android:layout_marginBottom="16dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Masukkan nomor WhatsApp Anda (Private Sender):"
-        android:textSize="12sp"
-        android:textColor="#CCC"
-        android:layout_marginBottom="12dp" />
 
     <EditText
         android:id="@+id/etSenderNumber"
@@ -34,7 +24,7 @@
         android:textColorHint="#777"
         android:textColor="#FFF"
         android:textStyle="bold"
-        android:background="@drawable/bg_bug_inactive"
+        android:background="@drawable/bg_login_input"
         android:padding="15dp"
         android:inputType="phone"
         android:layout_marginBottom="24dp" />
@@ -46,6 +36,5 @@
         android:text="SIMPAN SENDER"
         android:textStyle="bold"
         android:textColor="#FFF"
-        android:fontFamily="sans-serif-black"
-        android:background="@drawable/bg_glow_border" />
+        android:background="@drawable/bg_glow_button" />
 </LinearLayout>
