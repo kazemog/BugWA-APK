@@ -13,14 +13,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 public class MainActivity extends Activity {
     public static boolean isRunning = false;
     public static String targetNum = "";
     public static String senderNum = "";
     public static String bugType = "crash";
-    private VideoView bannerVideo;
     private LinearLayout currentBugBtn;
 
     @Override
@@ -28,25 +26,18 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Load Video Banner (Pastikan file bannerapk.mp4 ada di res/raw)
-        bannerVideo = findViewById(R.id.bannerVideo);
-        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.bannerapk);
-        bannerVideo.setVideoURI(videoUri);
-        bannerVideo.setOnPreparedListener(mp -> {
-            mp.setLooping(true);
-            mp.setVolume(0, 0);
-            bannerVideo.start();
-        });
+        // Load Banner Image (bannerbug.jpg)
+        ImageView banner = findViewById(R.id.bannerImage);
+        banner.setImageResource(getResources().getIdentifier("bannerbug", "drawable", getPackageName()));
 
-        // Load Logo (Pastikan file logo.jpg ada di res/drawable)
+        // Load Logo Image (logo.jpg)
         ImageView logo = findViewById(R.id.logoImage);
         logo.setImageResource(getResources().getIdentifier("logo", "drawable", getPackageName()));
 
         final EditText etTarget = findViewById(R.id.targetNum);
         Button btnStart = findViewById(R.id.btnStart);
-        final TextView terminal = findViewById(R.id.terminalLog);
         
-        // Setup Bug Selection
+        // Setup Bug Selection dengan Gradient Border
         LinearLayout bugCrash = findViewById(R.id.bugCrash);
         LinearLayout bugDelay = findViewById(R.id.bugDelay);
         LinearLayout bugFreeze = findViewById(R.id.bugFreeze);
@@ -61,24 +52,10 @@ public class MainActivity extends Activity {
         bugQuota.setOnClickListener(v -> selectBug("quota", bugQuota));
         bugVirus.setOnClickListener(v -> selectBug("virus", bugVirus));
 
-        // Setup Sender Type
-        Button btnPublic = findViewById(R.id.btnPublic);
-        Button btnPrivate = findViewById(R.id.btnPrivate);
-        
-        btnPublic.setOnClickListener(v -> {
-            btnPublic.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFA0C0FF));
-            btnPrivate.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFD0D0D0));
-        });
-        
-        btnPrivate.setOnClickListener(v -> {
-            btnPrivate.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFA0C0FF));
-            btnPublic.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFD0D0D0));
-        });
-
-        // Manage Sender Dialog
+        // Tombol Manage Sender
         findViewById(R.id.btnManageSender).setOnClickListener(v -> showAddSenderDialog());
 
-        // Start Button
+        // Tombol Start
         btnStart.setOnClickListener(v -> {
             targetNum = etTarget.getText().toString().trim();
             if(targetNum.startsWith("0")) targetNum = "62" + targetNum.substring(1);
@@ -104,8 +81,10 @@ public class MainActivity extends Activity {
 
     private void selectBug(String type, LinearLayout btn) {
         bugType = type;
-        currentBugBtn.setBackgroundColor(0xFFD0D0D0);
-        btn.setBackgroundColor(0xFFA0C0FF);
+        // Reset background yang lama ke inactive
+        currentBugBtn.setBackgroundResource(R.drawable.bg_bug_inactive);
+        // Set yang baru ke active
+        btn.setBackgroundResource(R.drawable.bg_bug_active);
         currentBugBtn = btn;
     }
 
