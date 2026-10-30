@@ -7,23 +7,17 @@
     <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp" android:scrollbars="none">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
 
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="KAZE BUG" android:textSize="36sp" android:textStyle="bold" android:textColor="#FFFFFF" android:fontFamily="sans-serif-black" android:shadowColor="#00FF41" android:shadowRadius="15" android:layout_marginBottom="12dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="KAZE BUG" android:textSize="36sp" android:textStyle="bold" android:textColor="#FFFFFF" android:fontFamily="sans-serif-black" android:shadowColor="#D2B48C" android:shadowRadius="15" android:layout_marginBottom="12dp" />
 
-            <!-- Banner dengan Glow -->
             <ImageView android:id="@+id/bannerImage" android:layout_width="match_parent" android:layout_height="200dp" android:scaleType="centerCrop" android:background="@drawable/bg_glow_border" android:padding="3dp" android:layout_marginBottom="16dp" />
 
-            <!-- Profil Kosong (Tanpa Foto) -->
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@drawable/bg_glow_border" android:padding="12dp" android:gravity="center_vertical" android:layout_marginBottom="20dp">
-                
-                <!-- Lingkaran Kosong -->
-                <View android:layout_width="60dp" android:layout_height="60dp" android:background="@drawable/bg_circle" android:layout_marginRight="12dp" />
-                
+                <View android:layout_width="60dp" android:layout_height="60dp" android:background="@drawable/bg_glow_border" android:layout_marginRight="12dp" />
                 <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KAZE MORALES" android:textSize="18sp" android:textStyle="bold" android:textColor="#FFF" android:fontFamily="sans-serif-black" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="VVIP ACCESS" android:textSize="12sp" android:textStyle="bold" android:textColor="#FF3333" android:fontFamily="sans-serif-black" />
                 </LinearLayout>
-                
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ONLINE" android:textStyle="bold" android:textColor="#00FF41" android:fontFamily="sans-serif-black" android:shadowColor="#00FF41" android:shadowRadius="8" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ONLINE" android:textStyle="bold" android:textColor="#00FF41" android:fontFamily="sans-serif-black" />
             </LinearLayout>
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TARGET WHATSAPP" android:textColor="#FFF" android:textStyle="bold" android:fontFamily="sans-serif-black" android:layout_marginBottom="8dp" />
@@ -31,61 +25,48 @@
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PILIH METODE BUG" android:textColor="#FFF" android:textStyle="bold" android:fontFamily="sans-serif-black" android:layout_marginBottom="8dp" />
 
-            <!-- 8 Pilihan Bug -->
             <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="20dp" android:scrollbars="none">
                 <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
                     
-                    <LinearLayout android:id="@+id/bugCrash" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_glow_border" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
+                    <LinearLayout android:id="@+id/bugCrash" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_bug_active" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
                         <TextView android:text="💥" android:textSize="24sp" />
                         <TextView android:text="CRASH" android:textSize="12sp" android:textStyle="bold" android:textColor="#FF3333" android:fontFamily="sans-serif-black" />
                         <TextView android:text="Force Close" android:textSize="9sp" android:textColor="#AAA" />
                     </LinearLayout>
 
-                    <LinearLayout android:id="@+id/bugDelay" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_glow_border" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
+                    <LinearLayout android:id="@+id/bugDelay" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_bug_inactive" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
                         <TextView android:text="⏳" android:textSize="24sp" />
                         <TextView android:text="DELAY" android:textSize="12sp" android:textStyle="bold" android:textColor="#FFB800" android:fontFamily="sans-serif-black" />
                         <TextView android:text="Spam Lag" android:textSize="9sp" android:textColor="#AAA" />
                     </LinearLayout>
 
-                    <LinearLayout android:id="@+id/bugFreeze" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_glow_border" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
+                    <LinearLayout android:id="@+id/bugFreeze" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_bug_inactive" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
                         <TextView android:text="❄️" android:textSize="24sp" />
                         <TextView android:text="FREEZE" android:textSize="12sp" android:textStyle="bold" android:textColor="#00F0FF" android:fontFamily="sans-serif-black" />
                         <TextView android:text="Bekukan Layar" android:textSize="9sp" android:textColor="#AAA" />
                     </LinearLayout>
 
-                    <LinearLayout android:id="@+id/bugQuota" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_glow_border" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
+                    <LinearLayout android:id="@+id/bugQuota" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_bug_inactive" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
                         <TextView android:text="📁" android:textSize="24sp" />
                         <TextView android:text="QUOTA" android:textSize="12sp" android:textStyle="bold" android:textColor="#B026FF" android:fontFamily="sans-serif-black" />
                         <TextView android:text="Full Memori" android:textSize="9sp" android:textColor="#AAA" />
                     </LinearLayout>
-
-                    <LinearLayout android:id="@+id/bugVirus" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_glow_border" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
-                        <TextView android:text="🦠" android:textSize="24sp" />
-                        <TextView android:text="VIRUS" android:textSize="12sp" android:textStyle="bold" android:textColor="#00FF41" android:fontFamily="sans-serif-black" />
-                        <TextView android:text="Crash Total" android:textSize="9sp" android:textColor="#AAA" />
-                    </LinearLayout>
-
-                    <LinearLayout android:id="@+id/bugCall" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_glow_border" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
-                        <TextView android:text="📞" android:textSize="24sp" />
-                        <TextView android:text="CALL" android:textSize="12sp" android:textStyle="bold" android:textColor="#FF8C00" android:fontFamily="sans-serif-black" />
-                        <TextView android:text="Spam Panggilan" android:textSize="9sp" android:textColor="#AAA" />
-                    </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <Button android:id="@+id/btnStart" android:layout_width="match_parent" android:layout_height="70dp" android:text="SEND BUG" android:textSize="24sp" android:textStyle="bold" android:textColor="#00FF41" android:fontFamily="sans-serif-black" android:background="@drawable/bg_glow_button" android:shadowColor="#00FF41" android:shadowRadius="15" android:layout_marginBottom="24dp" />
+            <Button android:id="@+id/btnStart" android:layout_width="match_parent" android:layout_height="70dp" android:text="SEND BUG" android:textSize="24sp" android:textStyle="bold" android:textColor="#FFF" android:fontFamily="sans-serif-black" android:background="@drawable/bg_glow_border" android:shadowColor="#8B4513" android:shadowRadius="15" android:layout_marginBottom="24dp" />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SENDER TYPE" android:textColor="#FFF" android:textStyle="bold" android:fontFamily="sans-serif-black" android:layout_marginBottom="8dp" />
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="8dp">
-                <Button android:id="@+id/btnPublic" android:layout_width="0dp" android:layout_weight="1" android:layout_height="60dp" android:text="PUBLIC" android:textStyle="bold" android:textColor="#FFF" android:background="@drawable/bg_glow_button" android:layout_marginRight="4dp" />
-                <Button android:id="@+id/btnPrivate" android:layout_width="0dp" android:layout_weight="1" android:layout_height="60dp" android:text="PRIVATE" android:textStyle="bold" android:textColor="#FFF" android:background="@drawable/bg_glow_button" android:layout_marginLeft="4dp" />
+                <Button android:id="@+id/btnPublic" android:layout_width="0dp" android:layout_weight="1" android:layout_height="60dp" android:text="PUBLIC" android:textStyle="bold" android:textColor="#FFF" android:fontFamily="sans-serif-black" android:background="@drawable/bg_bug_inactive" android:layout_marginRight="4dp" />
+                <Button android:id="@+id/btnPrivate" android:layout_width="0dp" android:layout_weight="1" android:layout_height="60dp" android:text="PRIVATE" android:textStyle="bold" android:textColor="#FFF" android:fontFamily="sans-serif-black" android:background="@drawable/bg_bug_inactive" android:layout_marginLeft="4dp" />
             </LinearLayout>
 
-            <Button android:id="@+id/btnManageSender" android:layout_width="match_parent" android:layout_height="50dp" android:text="MANAGE SENDER" android:textStyle="bold" android:textColor="#FFF" android:background="@drawable/bg_glow_button" android:layout_marginBottom="24dp" />
+            <Button android:id="@+id/btnManageSender" android:layout_width="match_parent" android:layout_height="50dp" android:text="MANAGE SENDER" android:textStyle="bold" android:textColor="#FFF" android:fontFamily="sans-serif-black" android:background="@drawable/bg_glow_border" android:layout_marginBottom="24dp" />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KAZE TERMINAL LOG" android:textColor="#FFF" android:textStyle="bold" android:fontFamily="sans-serif-black" android:layout_marginBottom="8dp" />
             <ScrollView android:layout_width="match_parent" android:layout_height="150dp" android:background="@drawable/bg_glow_border" android:padding="10dp">
-                <TextView android:id="@+id/terminalLog" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="[SYSTEM] Root Access: OK\n[SYSTEM] Database Connected...\n[SYSTEM] Bypass Engine Ready.\n[SYSTEM] Waiting for target..." android:textColor="#00FF41" android:fontFamily="monospace" android:textSize="12sp" />
+                <TextView android:id="@+id/terminalLog" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="[SYSTEM] Initializing Kaze Core...\n[SYSTEM] Bypass Security... OK\n[SYSTEM] Waiting for target..." android:textColor="#D2B48C" android:fontFamily="monospace" android:textSize="12sp" />
             </ScrollView>
         </LinearLayout>
     </ScrollView>
