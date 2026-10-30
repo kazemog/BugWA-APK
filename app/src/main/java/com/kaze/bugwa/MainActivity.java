@@ -20,68 +20,100 @@ public class MainActivity extends Activity {
     public static String targetNum = "";
     public static String senderNum = "";
     public static String bugType = "crash";
-    public static String senderType = "private";
+    public static String senderType = "private"; 
+
+    private Button btnPublic, btnPrivate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        try {
-            setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
-            ImageView banner = findViewById(R.id.bannerImage);
-            int bannerResId = getResources().getIdentifier("bannerbug", "drawable", getPackageName());
-            if (bannerResId != 0 && banner != null) banner.setImageResource(bannerResId);
-
-            final EditText etTarget = findViewById(R.id.targetNum);
-            Button btnStart = findViewById(R.id.btnStart);
-            
-            LinearLayout bugCrash = findViewById(R.id.bugCrash);
-            LinearLayout bugDelay = findViewById(R.id.bugDelay);
-            LinearLayout bugFreeze = findViewById(R.id.bugFreeze);
-            LinearLayout bugQuota = findViewById(R.id.bugQuota);
-
-            if(bugCrash != null) bugCrash.setOnClickListener(v -> bugType = "crash");
-            if(bugDelay != null) bugDelay.setOnClickListener(v -> bugType = "delay");
-            if(bugFreeze != null) bugFreeze.setOnClickListener(v -> bugType = "freeze");
-            if(bugQuota != null) bugQuota.setOnClickListener(v -> bugType = "quota");
-
-            Button btnPublic = findViewById(R.id.btnPublic);
-            Button btnPrivate = findViewById(R.id.btnPrivate);
-
-            if(btnPublic != null) btnPublic.setOnClickListener(v -> senderType = "public");
-            if(btnPrivate != null) btnPrivate.setOnClickListener(v -> senderType = "private");
-
-            findViewById(R.id.btnManageSender).setOnClickListener(v -> showSenderDialog());
-
-            btnStart.setOnClickListener(v -> {
-                targetNum = etTarget.getText().toString().trim();
-                if(targetNum.startsWith("0")) targetNum = "62" + targetNum.substring(1);
-                if(targetNum.isEmpty()) { 
-                    Toast.makeText(this, "Isi nomor target!", Toast.LENGTH_SHORT).show(); 
-                    return; 
-                }
-                
-                SharedPreferences prefs = getSharedPreferences("kaze", MODE_PRIVATE);
-                senderNum = prefs.getString("sender", "");
-
-                if (senderType.equals("private") && senderNum.isEmpty()) {
-                    Toast.makeText(this, "Private Sender kosong! Isi dulu.", Toast.LENGTH_LONG).show();
-                    showSenderDialog();
-                    return;
-                }
-                
-                if(!isAccessibilityEnabled()) {
-                    Toast.makeText(this, "Aktifkan Aksesibilitas dulu di Pengaturan HP!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
-                } else {
-                    launchWA();
-                }
-            });
-            
-        } catch (Exception e) {
-            Toast.makeText(this, "Terjadi kesalahan layout: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        // 1. LOAD BANNER
+        ImageView banner = findViewById(R.id.bannerImage);
+        int bannerResId = getResources().getIdentifier("bannerbug", "drawable", getPackageName());
+        if (bannerResId != 0 && banner != null) {
+            banner.setImageResource(bannerResId);
         }
+
+        final EditText etTarget = findViewById(R.id.targetNum);
+        Button btnStart = findViewById(R.id.btnStart);
+        
+        // 2. SETUP BUG SELECTION
+        LinearLayout bugCrash = findViewById(R.id.bugCrash);
+        LinearLayout bugDelay = findViewById(R.id.bugDelay);
+        LinearLayout bugFreeze = findViewById(R.id.bugFreeze);
+        LinearLayout bugQuota = findViewById(R.id.bugQuota);
+
+        if(bugCrash != null) bugCrash.setOnClickListener(v -> selectBug("crash", bugCrash));
+        if(bugDelay != null) bugDelay.setOnClickListener(v -> selectBug("delay", bugDelay));
+        if(bugFreeze != null) bugFreeze.setOnClickListener(v -> selectBug("freeze", bugFreeze));
+        if(bugQuota != null) bugQuota.setOnClickListener(v -> selectBug("quota", bugQuota));
+
+        // 3. SETUP SENDER SELECTION (PUBLIC vs PRIVATE)
+        btnPublic = findViewById(R.id.btnPublic);
+        btnPrivate = findViewById(R.id.btnPrivate);
+
+        // Default: Private nyala
+        if(btnPrivate != null) btnPrivate.setBackgroundResource(R.drawable.bg_bug_active);
+        if(btnPublic != null) btnPublic.setBackgroundResource(R.drawable.bg_bug_inactive);
+
+        if(btnPublic != null) {
+            btnPublic.setOnClickListener(v -> {
+                senderType = "public";
+                btnPublic.setBackgroundResource(R.drawable.bg_bug_active);
+                btnPrivate.setBackgroundResource(R.drawable.bg_bug_inactive);
+                Toast.makeText(this, "Mode: Public (Tanpa Nomor Sender)", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        if(btnPrivate != null) {
+            btnPrivate.setOnClickListener(v -> {
+                senderType = "private";
+                btnPrivate.setBackgroundResource(R.drawable.bg_bug_active);
+                btnPublic.setBackgroundResource(R.drawable.bg_bug_inactive);
+                Toast.makeText(this, "Mode: Private (Butuh Nomor Sender)", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        findViewById(R.id.btnManageSender).setOnClickListener(v -> showSenderDialog());
+
+        // 4. TOMBOL SEND BUG
+        btnStart.setOnClickListener(v -> {
+            targetNum = etTarget.getText().toString().trim();
+            if(targetNum.startsWith("0")) targetNum = "62" + targetNum.substring(1);
+            
+            if(targetNum.isEmpty()) { 
+                Toast.makeText(this, "Isi nomor target!", Toast.LENGTH_SHORT).show(); 
+                return; 
+            }
+            
+            SharedPreferences prefs = getSharedPreferences("kaze", MODE_PRIVATE);
+            senderNum = prefs.getString("sender", "");
+
+            // JIKA PRIVATE TAPI NOMOR KOSONG
+            if (senderType.equals("private") && senderNum.isEmpty()) {
+                Toast.makeText(this, "Private Sender kosong! Silakan isi dulu.", Toast.LENGTH_LONG).show();
+                showSenderDialog();
+                return;
+            }
+            
+            if(!isAccessibilityEnabled()) {
+                Toast.makeText(this, "Aktifkan Aksesibilitas dulu di Pengaturan HP!", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+            } else {
+                launchWA();
+            }
+        });
+    }
+
+    private void selectBug(String type, LinearLayout btn) {
+        bugType = type;
+        LinearLayout[] btns = {findViewById(R.id.bugCrash), findViewById(R.id.bugDelay), findViewById(R.id.bugFreeze), findViewById(R.id.bugQuota)};
+        for(LinearLayout b : btns) {
+            if(b != null) b.setBackgroundResource(R.drawable.bg_bug_inactive);
+        }
+        if(btn != null) btn.setBackgroundResource(R.drawable.bg_bug_active);
     }
 
     private void showSenderDialog() {
@@ -121,6 +153,8 @@ public class MainActivity extends Activity {
 
     private void launchWA() {
         isRunning = true;
+        String mode = senderType.equals("public") ? "Global Sender" : senderNum;
+        Toast.makeText(this, "Menembak via " + mode, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/" + targetNum));
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);

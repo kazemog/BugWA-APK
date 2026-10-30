@@ -23,15 +23,17 @@
             android:shadowRadius="10"
             android:layout_marginBottom="12dp" />
 
+        <!-- Banner -->
         <ImageView
             android:id="@+id/bannerImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:scaleType="centerCrop"
             android:background="@drawable/bg_glow_border"
             android:padding="3dp"
             android:layout_marginBottom="16dp" />
 
+        <!-- Profil Card -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,10 +43,11 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="20dp">
             
-            <View
+            <!-- Profil Bulat -->
+            <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/bg_glow_border"
+                android:background="@drawable/bg_circle_glow"
                 android:layout_marginRight="12dp" />
             
             <LinearLayout
@@ -84,24 +87,28 @@
             
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
                 
+                <!-- Bug Crash -->
                 <LinearLayout android:id="@+id/bugCrash" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_bug_active" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💥" android:textSize="24sp" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CRASH" android:textSize="12sp" android:textStyle="bold" android:textColor="#FF3333" android:fontFamily="sans-serif-black" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FC WA Target" android:textSize="9sp" android:textColor="#AAA" />
                 </LinearLayout>
 
+                <!-- Bug Delay -->
                 <LinearLayout android:id="@+id/bugDelay" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_bug_inactive" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⏳" android:textSize="24sp" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DELAY" android:textSize="12sp" android:textStyle="bold" android:textColor="#FFB800" android:fontFamily="sans-serif-black" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spam Lag" android:textSize="9sp" android:textColor="#AAA" />
                 </LinearLayout>
 
+                <!-- Bug Freeze -->
                 <LinearLayout android:id="@+id/bugFreeze" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_bug_inactive" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="❄️" android:textSize="24sp" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FREEZE" android:textSize="12sp" android:textStyle="bold" android:textColor="#00F0FF" android:fontFamily="sans-serif-black" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bekukan Layar" android:textSize="9sp" android:textColor="#AAA" />
                 </LinearLayout>
 
+                <!-- Bug Quota -->
                 <LinearLayout android:id="@+id/bugQuota" android:layout_width="120dp" android:layout_height="110dp" android:background="@drawable/bg_bug_inactive" android:orientation="vertical" android:gravity="center" android:layout_marginRight="8dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📁" android:textSize="24sp" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="QUOTA" android:textSize="12sp" android:textStyle="bold" android:textColor="#B026FF" android:fontFamily="sans-serif-black" />
@@ -110,6 +117,7 @@
             </LinearLayout>
         </HorizontalScrollView>
 
+        <!-- Tombol Send -->
         <Button
             android:id="@+id/btnStart"
             android:layout_width="match_parent"
@@ -124,9 +132,10 @@
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SENDER TYPE" android:textColor="#FFF" android:textStyle="bold" android:fontFamily="sans-serif-black" android:layout_marginBottom="8dp" />
         
+        <!-- Tombol Sender -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="8dp">
             <Button android:id="@+id/btnPublic" android:layout_width="0dp" android:layout_weight="1" android:layout_height="60dp" android:text="PUBLIC" android:textStyle="bold" android:textColor="#FFF" android:fontFamily="sans-serif-black" android:background="@drawable/bg_bug_inactive" android:layout_marginRight="4dp" />
-            <Button android:id="@+id/btnPrivate" android:layout_width="0dp" android:layout_weight="1" android:layout_height="60dp" android:text="PRIVATE" android:textStyle="bold" android:textColor="#FFF" android:fontFamily="sans-serif-black" android:background="@drawable/bg_bug_inactive" android:layout_marginLeft="4dp" />
+            <Button android:id="@+id/btnPrivate" android:layout_width="0dp" android:layout_weight="1" android:layout_height="60dp" android:text="PRIVATE" android:textStyle="bold" android:textColor="#FFF" android:fontFamily="sans-serif-black" android:background="@drawable/bg_bug_active" android:layout_marginLeft="4dp" />
         </LinearLayout>
 
         <Button
@@ -140,6 +149,7 @@
             android:background="@drawable/bg_glow_border"
             android:layout_marginBottom="24dp" />
 
+        <!-- Log -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KAZE TERMINAL LOG" android:textColor="#FFF" android:textStyle="bold" android:fontFamily="sans-serif-black" android:layout_marginBottom="8dp" />
         
         <ScrollView
